@@ -49,13 +49,11 @@ var spotify = new Spotify({
         
         if (error) {
           return console.log('Error occurred: ' + error);
+      
         }
-        // const infoReceived = JSON.parse(body);
-        // console.log("Venue: ", infoReceived.venue)
 
-        console.log('error:', error);
-        console.log('statusCode:', response && response.statusCode); 
-        console.log('body:', body); 
+        console.log(JSON.parse(body));
+        // console.log(JSON.parse(body).object.venue)
       }
     )
   }else if(process.argv[2] === 'movie-this'){
