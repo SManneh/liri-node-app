@@ -3,12 +3,6 @@ const keys = require ("./keys.js")
 var Spotify = require('node-spotify-api');
 var request = require('request');
 
-// const spotifyId = process.env.SPOTIFY_ID;
-// const spotifySecret = process.env.SPOTIFY_SECRET;
-
-// console.log(spotifyId);
-// console.log(spotifySecret);
-
 
 // const validCommands = ["concert-this", "spotify-this", "movie-this", "do-what-it-says"];
 
@@ -51,8 +45,11 @@ var spotify = new Spotify({
           return console.log('Error occurred: ' + error);
       
         }
-
-        console.log(JSON.parse(body));
+        let venue = JSON.parse(body);
+        for(let i = 0; i < venue.length; i++){
+          console.log(venue[i].name)
+        }
+        // console.log(JSON.parse(body));
         // console.log(JSON.parse(body).object.venue)
       }
     )
