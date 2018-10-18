@@ -170,6 +170,8 @@ const spotify = new Spotify(keys.spotify);
 
    * Using the `fs` Node package, LIRI will take the text inside of random.txt and then use it to call one of LIRI's commands.
 
+   fs function and readfile .split method
+
      * It should run `spotify-this-song` for "I Want it That Way," as follows the text in `random.txt`.
 
      * Edit the text in random.txt to test out the feature for movie-this and my-tweets
