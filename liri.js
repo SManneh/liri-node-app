@@ -11,40 +11,44 @@ const spotify = new Spotify({
     secret: keys.spotify.secret
   });
 //Global variables 
-//
+//slice method is used to be able to pass multiple words to the argument
  var song = process.argv.slice(3, process.argv.length).join(' ');
  var movieName = process.argv.slice(3, process.argv.length).join(' ');
  var artistName = process.argv.slice(3, process.argv.length).join(' ');
- 
+ var command = process.argv[2];
  // function to call if the argument passed is spotify-this
-  if( process.argv[2] === 'spotify-this'){
+  if( command === 'spotify-this'){
 
     spotifyThis();
 }// function to call if the argument passed is concert-this
-   else if(process.argv[2] === 'concert-this'){
+   else if(command === 'concert-this'){
 
     concertThis();
 }// function to call if the argument passed is movie-this
-  else if(process.argv[2] === 'movie-this'){
+  else if(command === 'movie-this'){
 
     movieThis();    
 }
 // function to call if the argument passed is do-what-it-says
-   else if ( process.argv[2] === 'do-what-it-says'){
+   else if ( command === 'do-what-it-says'){
 
     doWhatISay()
   };
 
-
+//function to run the command in the txt file
   function doWhatISay(){
     fs.readFile('random.txt', 'utf8', function(error, data) {
       if (error) {
         return console.log(error);
       }
-    
-      // We will then print the contents of data
-      console.log(data);
-    
+      //assigned command value to the data 
+      command = data.slice(0,12);
+      song = data.slice(14, data.length);
+      //command to run if data matches spotify command
+      if(command === "spotify-this"){
+        spotifyThis()
+      }
+      
     
     });
   };
@@ -82,7 +86,9 @@ const spotify = new Spotify({
             return console.log('Error occurred: ' + error);
         
           }
+          // to display the data in a JSON format which is easily readable 
           let venue = JSON.parse(body);
+          //for loop is to loop through the data to extract what is only needed which in this case is the venue
           for(let i = 0; i < venue.length; i++){
             console.log(venue[i].venue)
           }
@@ -93,15 +99,18 @@ const spotify = new Spotify({
     };
 
   function movieThis(){
+    //movie to pass through the command when no movie name is provided
     if (movieName === ""){
       movieName = "Mr. Nobody"
     }
+    //api request for movie data
   request(
     `http://www.omdbapi.com/?t=${movieName}&apikey=${keys.movie.id}` , function (error, response, body) {
   
       if (error) {
         return console.log('Error occurred: ' + error);
       }
+      //output data when command is ran
       const dataReceived = JSON.parse(body);
       console.log("Movie Title: ", dataReceived.Title );
       console.log("Year: ", dataReceived.Year );
