@@ -3,7 +3,37 @@ const keys = require ("./keys.js")
 const Spotify = require('node-spotify-api');
 const request = require('request');
 const fs = require('fs');
+// var inquirer = require('inquirer');
 
+// inquirer
+//   .prompt([
+//     {
+//       type: 'checkbox',
+//       message: 'Select the command you would like to run',
+//       name: 'commands',
+//       choices: [
+      
+//         {
+//           name: 'Spotify-this (Song)'
+//         },
+//         {
+//           name: 'Movie-this (Movie)'
+//         },
+//         {
+//           name: 'Concert-this (Artist or Band)'
+//         },
+//         {
+//           name: 'do-what-it-says (Suprise :b)'
+//         }
+//       ]
+//     }
+
+//       ])
+//       .then(answers => {
+//         console.log("=======Enter node liri 'chosen command' plus Any Song/Movie/Artist of choice corresponding with the command In the command line======");
+      
+//       });
+    
 
 
 const spotify = new Spotify({
